@@ -40,6 +40,9 @@ public class Vehicle {
     @Column(name="img_path")
     private String imgPath;
 
+    @Column
+    private Boolean transmission;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
