@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.Year;
 
 @Entity
 @Table(name="vehicle")
@@ -23,7 +22,7 @@ public class Vehicle {
     private Integer id;
 
     @Column(name="production_year")
-    private Year productionYear;
+    private String productionYear;
 
     @Column(name="model")
     private String model;
@@ -34,7 +33,7 @@ public class Vehicle {
     @Column(name = "plate_number")
     private String plateNumber;
 
-    @Column
+    @Column(name = "is_avaliable")
     private Boolean isAvaliable;
 
     @Column(name="img_path")
@@ -49,6 +48,5 @@ public class Vehicle {
 
     @ManyToOne
     @JoinColumn(name = "location_id")
-    @JsonIgnore
     private Location location;
 }
