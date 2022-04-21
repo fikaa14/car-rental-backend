@@ -30,9 +30,6 @@ public class Bill {
     @Column
     private Boolean isPaid;
 
-    @Column(name="late_fee")
-    private Double lateFee;
-
     @Column
     private Double taxes;
 

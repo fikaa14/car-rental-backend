@@ -27,9 +27,6 @@ public class Booking {
     @Column(name="end_rent")
     private Date endDate;
 
-    @Column(name="real_end_rent")
-    private Date returnedDate;
-
     @Column
     private Boolean isActive;
 

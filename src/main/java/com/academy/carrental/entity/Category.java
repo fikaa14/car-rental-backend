@@ -34,9 +34,6 @@ public class Category {
     @Column(name="day_price")
     private Double pricePerDay;
 
-    @Column(name="late_fee")
-    private Double lateFee;
-
     @OneToMany(mappedBy = "category")
     @JsonIgnore
     private List<Vehicle> vehicles;

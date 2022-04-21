@@ -23,11 +23,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
-    private String name;
+    @Column(name="first_name")
+    private String firstName;
+
+    @Column(name="last_name")
+    private String lastName;
 
     @Column
     private String username;
+
+    @Column(name="is_member")
+    private Boolean isMember;
 
     @Column
     private String password;

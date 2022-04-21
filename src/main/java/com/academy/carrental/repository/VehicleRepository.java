@@ -1,6 +1,8 @@
 package com.academy.carrental.repository;
 
 import com.academy.carrental.entity.Vehicle;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -10,31 +12,61 @@ import java.util.List;
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
 
-    List<Vehicle> findAll();
+    Page<Vehicle> findAll(Pageable pageable);
 
     @Query(
             value = "SELECT vehicle FROM Vehicle AS vehicle " +
                     "ORDER BY vehicle.category.pricePerDay asc"
     )
-    List<Vehicle> findAllSortedPriceAsc();
+    Page<Vehicle> findAllSortedPriceAsc(Pageable pageable);
 
     @Query(
             value = "SELECT vehicle FROM Vehicle AS vehicle " +
                     "ORDER BY vehicle.category.pricePerDay desc"
     )
-    List<Vehicle> findAllSortedPriceDesc();
+    Page<Vehicle> findAllSortedPriceDesc(Pageable pageable);
 
     @Query(
             value = "SELECT vehicle FROM Vehicle AS vehicle " +
                     "ORDER BY vehicle.productionYear desc "
     )
-    List<Vehicle> findAllSortedByProductionYearDesc();
+    Page<Vehicle> findAllSortedByProductionYearDesc(Pageable pageable);
 
     @Query(
             value = "SELECT vehicle FROM Vehicle AS vehicle " +
                     "ORDER BY vehicle.productionYear asc"
     )
-    List<Vehicle> findAllSortedByProductionYearAsc();
+    Page<Vehicle> findAllSortedByProductionYearAsc(Pageable pageable);
 
-    List<Vehicle> findAllByIsAvaliableEquals(Boolean isAvilable);
+    Page<Vehicle> findAllByIsAvaliableEquals(Boolean isAvailable, Pageable pageable);
+
+    @Query(
+            value = "SELECT COUNT(vehicle.plateNumber) FROM Vehicle as vehicle"
+    )
+    Integer countAll();
+
+    Page<Vehicle> findAllByCategoryName(String category, Pageable pageable);
+
+    @Query(
+            value= "SELECT category.name FROM Category as category"
+    )
+    List<String> getAllCategoryNames();
+
+    Integer countAllByCategoryName(String categoryName);
+
+    @Query(
+            value = "select vehicle.* from vehicle, category, location " +
+                    "where vehicle.category_id = category.id and vehicle.location_id = location.id " +
+                    "and category.name = :category order by vehicle.production_year asc",
+            nativeQuery = true
+    )
+    Page<Vehicle> getAllByCategoryNameAndProductionYearSortedAsc(String category, Pageable pageable);
+
+    @Query(
+            value = "select vehicle.* from vehicle, category, location " +
+                    "where vehicle.category_id = category.id and vehicle.location_id = location.id " +
+                    "and category.name = :category order by vehicle.production_year desc",
+            nativeQuery = true
+    )
+    Page<Vehicle> getAllByCategoryNameAndProductionYearSortedDesc(String category, Pageable pageable);
 }

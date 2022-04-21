@@ -40,9 +40,6 @@ public class Customer {
     @Column(name="last_name")
     private String lastName;
 
-    @Column
-    private Boolean isMember;
-
     @OneToMany(mappedBy = "customer")
     @JsonIgnore
     private List<Booking> bookings;

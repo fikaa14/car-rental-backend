@@ -1,13 +1,12 @@
 package com.academy.carrental.controller;
 
-import com.academy.carrental.entity.Vehicle;
+import com.academy.carrental.dto.VehicleDTO;
 import com.academy.carrental.service.VehicleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,44 +18,93 @@ public class VehicleController {
     private final VehicleService vehicleService;
 
     @GetMapping("get-all")
-    public ResponseEntity<List<Vehicle>> getAll()
+    public ResponseEntity<List<VehicleDTO>> getAll(Pageable pageable)
     {
-        List<Vehicle> vehicleList = vehicleService.getAllVehicles();
-        return new ResponseEntity<>(vehicleList, HttpStatus.OK);
+        List<VehicleDTO> resultList = vehicleService.getAllVehicles(pageable);
+        return new ResponseEntity<>(resultList, HttpStatus.OK);
     }
 
     @GetMapping("get-all-sorted-by/price-asc")
-    public ResponseEntity<List<Vehicle>> getAllSortedByPriceAsc()
+    public ResponseEntity<List<VehicleDTO>> getAllSortedByPriceAsc(Pageable pageable)
     {
-        List<Vehicle> vehicleList = vehicleService.getAllSortedByPriceAsc();
-        return new ResponseEntity<>(vehicleList, HttpStatus.OK);
+        List<VehicleDTO> resultList = vehicleService.getAllSortedByPriceAsc(pageable);
+        return new ResponseEntity<>(resultList, HttpStatus.OK);
     }
 
     @GetMapping("get-all-sorted-by/price-desc")
-    public ResponseEntity<List<Vehicle>> getAllSortedByPriceDesc()
+    public ResponseEntity<List<VehicleDTO>> getAllSortedByPriceDesc(Pageable pageable)
     {
-        List<Vehicle> vehicleList = vehicleService.getAllSortedByPriceDesc();
-        return new ResponseEntity<>(vehicleList, HttpStatus.OK);
+        List<VehicleDTO> resultList = vehicleService.getAllSortedByPriceDesc(pageable);
+        return new ResponseEntity<>(resultList, HttpStatus.OK);
     }
 
     @GetMapping("get-all-sorted-by/production-year-asc")
-    public ResponseEntity<List<Vehicle>> getAllSortedByProductionYearAsc()
+    public ResponseEntity<List<VehicleDTO>> getAllSortedByProductionYearAsc(Pageable pageable)
     {
-        List<Vehicle> vehicleList = vehicleService.getAllSortedByProductionYearAsc();
-        return new ResponseEntity<>(vehicleList, HttpStatus.OK);
+        List<VehicleDTO> resultList = vehicleService.getAllSortedByProductionYearAsc(pageable);
+        return new ResponseEntity<>(resultList, HttpStatus.OK);
     }
 
     @GetMapping("get-all-sorted-by/production-year-desc")
-    public ResponseEntity<List<Vehicle>> getAllSortedByProductionYearDesc()
+    public ResponseEntity<List<VehicleDTO>> getAllSortedByProductionYearDesc(Pageable pageable)
     {
-        List<Vehicle> vehicleList = vehicleService.getAllSortedByProductionYearDesc();
-        return new ResponseEntity<>(vehicleList, HttpStatus.OK);
+        List<VehicleDTO> resultList = vehicleService.getAllSortedByProductionYearDesc(pageable);
+        return new ResponseEntity<>(resultList, HttpStatus.OK);
     }
 
     @GetMapping("get-all-available")
-    public ResponseEntity<List<Vehicle>> getAllAvailable()
+    public ResponseEntity<List<VehicleDTO>> getAllAvailable(Pageable pageable)
     {
-        List<Vehicle> vehicleList = vehicleService.getAllAvailable(true);
-        return new ResponseEntity<>(vehicleList, HttpStatus.OK);
+        List<VehicleDTO> resultList = vehicleService.getAllAvailable(true, pageable);
+        return new ResponseEntity<>(resultList, HttpStatus.OK);
+    }
+
+    @GetMapping("get-number")
+    public ResponseEntity<Integer> getNumber()
+    {
+        Integer vehicleNumber = vehicleService.getNumber();
+        return new ResponseEntity<>(vehicleNumber, HttpStatus.OK);
+    }
+
+    @GetMapping("get-by-id/{id}")
+    public ResponseEntity<VehicleDTO> getVehicle(@PathVariable Integer id)
+    {
+        VehicleDTO vehicle = vehicleService.getById(id);
+        if(vehicle!=null) {
+            return new ResponseEntity<>(vehicle, HttpStatus.OK);
+        }
+        else
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("get-category-names")
+    public ResponseEntity<List<String>> getCategoryNames()
+    {
+        List<String> categoryNames = vehicleService.getCategoryNames();
+        return new ResponseEntity<>(categoryNames, HttpStatus.OK);
+    }
+
+    @GetMapping("get-vehicles-number-by-category/{category}")
+    public ResponseEntity<Integer> getVehiclesNumberByCategory(@PathVariable String category)
+    {
+        Integer numberOfVehiclesByCategory = vehicleService.countVehiclesNumberByCategory(category);
+        return new ResponseEntity<>(numberOfVehiclesByCategory, HttpStatus.OK);
+    }
+
+    @GetMapping("get-by-category/{category}")
+    public ResponseEntity<List<VehicleDTO>> getByCategory(@PathVariable String category, Pageable pageable)
+    {
+        List<VehicleDTO> resultList = vehicleService.getByCategory(category, pageable);
+        return new ResponseEntity<>(resultList, HttpStatus.OK);
+    }
+
+    @GetMapping("get-sorted-by-type-and-category/{sort}&{category}")
+    public ResponseEntity<List<VehicleDTO>> getSortedByTypeAndCategory
+            (@PathVariable("sort")String sort,
+             @PathVariable("category") String category,
+             Pageable pageable)
+    {
+        List<VehicleDTO> resultList = vehicleService.getAllSortedByTypeAndCategory(sort, category, pageable);
+        return new ResponseEntity<>(resultList, HttpStatus.OK);
     }
 }
