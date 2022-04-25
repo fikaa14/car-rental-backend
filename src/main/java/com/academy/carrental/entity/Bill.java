@@ -27,7 +27,7 @@ public class Bill {
     @Column
     private Date date;
 
-    @Column
+    @Column(name="is_paid")
     private Boolean isPaid;
 
     @Column
@@ -35,10 +35,6 @@ public class Bill {
 
     @Column
     private Double total;
-
-    @OneToMany(mappedBy = "bill")
-    @JsonIgnore
-    private Set<Discount> discounts;
 
     @OneToMany(mappedBy = "bill")
     @JsonIgnore

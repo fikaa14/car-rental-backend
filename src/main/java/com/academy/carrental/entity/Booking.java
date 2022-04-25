@@ -1,5 +1,6 @@
 package com.academy.carrental.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,12 +28,8 @@ public class Booking {
     @Column(name="end_rent")
     private Date endDate;
 
-    @Column
+    @Column(name="is_active")
     private Boolean isActive;
-
-    @ManyToOne
-    @JoinColumn(name="location_id")
-    private Location location;
 
     @ManyToOne
     @JoinColumn(name="bill_id")
@@ -41,4 +38,8 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name="customer_id")
     private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name="vehicle_id")
+    private Vehicle vehicle;
 }

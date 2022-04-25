@@ -32,8 +32,4 @@ public class Location {
     @JsonIgnore
     private List<Vehicle> vehicles;
 
-    @OneToMany(mappedBy = "location")
-    @JsonIgnore
-    private List<Booking> bookings;
-
 }

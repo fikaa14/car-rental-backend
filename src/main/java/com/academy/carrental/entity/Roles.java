@@ -1,5 +1,6 @@
 package com.academy.carrental.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,6 @@ import java.util.Set;
 @Table(name="roles")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Roles {
 
@@ -26,5 +26,12 @@ public class Roles {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
     private Set<User> users = new HashSet<>();
+
+    public Roles(Integer id, String name)
+    {
+        this.id = id;
+        this.name = name;
+    }
 }

@@ -3,3 +3,7 @@ spring:
     name: Car Rental Web Application Demo
   profiles:
     active: dev
+
+jwt:
+  secret: dDEyMzEyMzEyYXNkYQ==
+  validityInMinutes: 60

@@ -1,6 +1,7 @@
 package com.academy.carrental.controller;
 
 import com.academy.carrental.dto.VehicleDTO;
+import com.academy.carrental.entity.Vehicle;
 import com.academy.carrental.service.VehicleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -60,9 +61,9 @@ public class VehicleController {
     }
 
     @GetMapping("get-number")
-    public ResponseEntity<Integer> getNumber()
+    public ResponseEntity<Long> getNumber()
     {
-        Integer vehicleNumber = vehicleService.getNumber();
+        long vehicleNumber = vehicleService.getNumber();
         return new ResponseEntity<>(vehicleNumber, HttpStatus.OK);
     }
 
@@ -106,5 +107,12 @@ public class VehicleController {
     {
         List<VehicleDTO> resultList = vehicleService.getAllSortedByTypeAndCategory(sort, category, pageable);
         return new ResponseEntity<>(resultList, HttpStatus.OK);
+    }
+
+    @PutMapping("save-unavailable")
+    public ResponseEntity<Void> changeToUnavailable(@RequestBody Vehicle vehicle)
+    {
+        vehicleService.changeToUnavailable(vehicle.getId());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

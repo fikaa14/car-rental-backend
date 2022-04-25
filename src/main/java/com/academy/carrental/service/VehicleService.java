@@ -1,7 +1,6 @@
 package com.academy.carrental.service;
 
 import com.academy.carrental.dto.VehicleDTO;
-import com.academy.carrental.entity.Category;
 import com.academy.carrental.entity.Vehicle;
 import com.academy.carrental.mapper.VehicleMapper;
 import com.academy.carrental.repository.VehicleRepository;
@@ -57,8 +56,8 @@ public class VehicleService {
         return getVehicleDTOS(page);
     }
 
-    public Integer getNumber()
-    { return vehicleRepository.countAll(); }
+    public long getNumber()
+    { return vehicleRepository.count(); }
 
     public VehicleDTO getById(Integer id)
     {
@@ -127,5 +126,14 @@ public class VehicleService {
         return null;
     }
 
-
+    public void changeToUnavailable(Integer id)
+    {
+        Optional<Vehicle> vehicleOptional = vehicleRepository.findById(id);
+        if(vehicleOptional.isPresent())
+        {
+            Vehicle vehicle = vehicleOptional.get();
+            vehicle.setIsAvaliable(false);
+            vehicleRepository.save(vehicle);
+        }
+    }
 }

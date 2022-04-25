@@ -40,11 +40,6 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
 
     Page<Vehicle> findAllByIsAvaliableEquals(Boolean isAvailable, Pageable pageable);
 
-    @Query(
-            value = "SELECT COUNT(vehicle.plateNumber) FROM Vehicle as vehicle"
-    )
-    Integer countAll();
-
     Page<Vehicle> findAllByCategoryName(String category, Pageable pageable);
 
     @Query(
@@ -69,4 +64,5 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
             nativeQuery = true
     )
     Page<Vehicle> getAllByCategoryNameAndProductionYearSortedDesc(String category, Pageable pageable);
+
 }

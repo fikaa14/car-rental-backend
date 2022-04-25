@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="vehicle")
@@ -49,4 +50,8 @@ public class Vehicle {
     @ManyToOne
     @JoinColumn(name = "location_id")
     private Location location;
+
+    @OneToMany(mappedBy = "vehicle", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Booking> bookings;
 }

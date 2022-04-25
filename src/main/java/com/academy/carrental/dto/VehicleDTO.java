@@ -1,11 +1,14 @@
 package com.academy.carrental.dto;
 
+import com.academy.carrental.entity.Booking;
 import com.academy.carrental.entity.Category;
 import com.academy.carrental.entity.Location;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,4 +26,5 @@ public class VehicleDTO {
     private Boolean transmission;
     private Category category;
     private Location location;
+    private List<Booking> bookings;
 }

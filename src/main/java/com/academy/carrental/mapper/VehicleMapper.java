@@ -7,7 +7,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface VehicleMapper {
 
-    Vehicle convertToEntity(VehicleDTO vehicleDTO);
     VehicleDTO convertToDTO(Vehicle vehicle);
 
 }
