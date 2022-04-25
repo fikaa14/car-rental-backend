@@ -71,7 +71,10 @@ public class VehicleController {
     public ResponseEntity<VehicleDTO> getVehicle(@PathVariable Integer id)
     {
         VehicleDTO vehicle = vehicleService.getById(id);
-        if(vehicle!=null) {
+        if(vehicle!=null && vehicle.getId()!=null && vehicle.getIsAvaliable()!=null &&
+            vehicle.getTransmission()!=null && vehicle.getCategory()!=null && vehicle.getImgPath()!=null &&
+            vehicle.getMileage()!=null && vehicle.getModel()!=null &&
+            vehicle.getPlateNumber()!=null && vehicle.getProductionYear()!=null) {
             return new ResponseEntity<>(vehicle, HttpStatus.OK);
         }
         else

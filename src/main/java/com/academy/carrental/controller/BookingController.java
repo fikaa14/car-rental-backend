@@ -23,7 +23,7 @@ public class BookingController {
     private final CustomerService customerService;
     private final BillService billService;
 
-    @Transactional //saveBill function simulates communication with a bank, if transaction fails booking wont be saved to database
+    @Transactional //saveBill function simulates communication with a bank, if transaction fails booking won't be saved to database, same goes for bill, and also customer
     @PostMapping("/save-booking")
     public ResponseEntity<Void> saveBooking(@RequestBody Booking booking)
     {
