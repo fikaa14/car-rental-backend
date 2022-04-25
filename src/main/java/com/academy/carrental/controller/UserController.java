@@ -1,5 +1,6 @@
 package com.academy.carrental.controller;
 
+import com.academy.carrental.entity.User;
 import com.academy.carrental.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,8 +25,13 @@ public class UserController {
     {
         boolean existsStatus = userService.existsByUsername(username);
         return new ResponseEntity<>(Collections.singletonMap("status", existsStatus), HttpStatus.OK);
+    }
 
-
+    @GetMapping(value="by-username/{username}")
+    public ResponseEntity<User> userByUsername(@PathVariable String username)
+    {
+        User user = userService.getByUsername(username);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
 }

@@ -136,4 +136,9 @@ public class VehicleService {
             vehicleRepository.save(vehicle);
         }
     }
+
+    public void deleteById(Integer id)
+    {
+        vehicleRepository.deleteById(id);
+    }
 }

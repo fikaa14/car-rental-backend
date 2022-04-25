@@ -8,6 +8,7 @@ import com.academy.carrental.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ public class BookingController {
     private final CustomerService customerService;
     private final BillService billService;
 
+    @Transactional //saveBill function simulates communication with a bank, if transaction fails booking wont be saved to database
     @PostMapping("/save-booking")
     public ResponseEntity<Void> saveBooking(@RequestBody Booking booking)
     {

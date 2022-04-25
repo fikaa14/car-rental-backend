@@ -27,7 +27,6 @@ public class UserService {
 
         for(String roleName:userForRegistrationDTO.getRoles())
         {
-            roleName = "ROLE_".concat(roleName);
             Integer id = rolesRepository.findIdByName(roleName);
             Optional<Roles> roleOptional = rolesRepository.findById(id);
             if(roleOptional.isPresent())
@@ -44,5 +43,10 @@ public class UserService {
     public boolean existsByUsername(String username)
     {
         return userRepository.existsByUsername(username);
+    }
+
+    public User getByUsername(String username)
+    {
+        return userRepository.findByUsername(username);
     }
 }

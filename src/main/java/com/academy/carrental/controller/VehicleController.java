@@ -115,4 +115,11 @@ public class VehicleController {
         vehicleService.changeToUnavailable(vehicle.getId());
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Integer id)
+    {
+        vehicleService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
