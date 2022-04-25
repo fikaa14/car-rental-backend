@@ -75,7 +75,7 @@ public class VehicleController {
             return new ResponseEntity<>(vehicle, HttpStatus.OK);
         }
         else
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("get-category-names")

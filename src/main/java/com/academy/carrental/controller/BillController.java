@@ -26,7 +26,7 @@ public class BillController {
             return new ResponseEntity<>(HttpStatus.CREATED);
         } else
         {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
