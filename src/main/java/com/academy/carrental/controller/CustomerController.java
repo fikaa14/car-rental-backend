@@ -20,7 +20,7 @@ public class CustomerController {
     @PostMapping("save")
     public ResponseEntity<Void> saveCustomer(@RequestBody Customer customer)
     {
-        if(customer!=null && customer.getId()!=null && customer.getAddress()!=null &&
+        if(customer!=null && customer.getAddress()!=null &&
             customer.getFirstName()!=null && customer.getLastName()!=null &&
             customer.getPhoneNumber()!=null && customer.getVehiclePermitNumber()!=null)
         {

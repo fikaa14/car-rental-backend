@@ -20,7 +20,7 @@ public class BillController {
     @PostMapping("save-bill")
     public ResponseEntity<Void> saveBill(@RequestBody Bill bill)
     {
-        if(bill!=null && bill.getId()!=null && bill.getDate()!=null && bill.getTaxes()!=null && bill.getTotal()!=null)
+        if(bill!=null &&  bill.getDate()!=null && bill.getTaxes()!=null && bill.getTotal()!=null)
         {
             billService.saveBill(bill);
             return new ResponseEntity<>(HttpStatus.CREATED);
