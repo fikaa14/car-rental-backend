@@ -27,15 +27,23 @@ public class BookingController {
     @PostMapping("/save-booking")
     public ResponseEntity<Void> saveBooking(@RequestBody Booking booking)
     {
-        billService.saveBill(booking.getBill());
-        Integer billID = billService.getLastId();
-        booking.getBill().setId(billID);
+        if(booking!=null && booking.getVehicle()!=null && booking.getIsActive()!=null
+                && booking.getStartDate()!=null && booking.getEndDate()!=null)
+        {
+            billService.saveBill(booking.getBill());
+            Integer billID = billService.getLastId();
+            booking.getBill().setId(billID);
 
-        customerService.saveCustomer(booking.getCustomer());
-        Integer customerID = customerService.getLastId();
-        booking.getCustomer().setId(customerID);
+            customerService.saveCustomer(booking.getCustomer());
+            Integer customerID = customerService.getLastId();
+            booking.getCustomer().setId(customerID);
 
-        bookingService.saveBooking(booking);
-        return new ResponseEntity<>(HttpStatus.OK);
+            bookingService.saveBooking(booking);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        else
+        {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }
