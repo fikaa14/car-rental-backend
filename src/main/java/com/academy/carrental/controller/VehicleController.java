@@ -125,4 +125,21 @@ public class VehicleController {
         vehicleService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PostMapping("add")
+    public ResponseEntity<Void> addVehicle(@RequestBody Vehicle vehicle)
+    {
+        if(vehicle != null && vehicle.getTransmission() != null && vehicle.getCategory() != null &&
+            vehicle.getImgPath() != null && vehicle.getMileage() != null && vehicle.getModel() != null &&
+            vehicle.getPlateNumber() != null && vehicle.getProductionYear() != null)
+        {
+            vehicleService.addVehicle(vehicle);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        else
+        {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+    }
 }

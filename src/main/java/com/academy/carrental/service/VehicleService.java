@@ -141,4 +141,9 @@ public class VehicleService {
     {
         vehicleRepository.deleteById(id);
     }
+
+    public void addVehicle(Vehicle vehicle)
+    {
+        vehicleRepository.save(vehicle);
+    }
 }
